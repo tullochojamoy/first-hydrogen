@@ -9,12 +9,17 @@
   },
   "scripts": {
     "dev": "shopify hydrogen dev",
-    "build": "shopify hydrogen build",
-    "preview": "shopify hydrogen preview",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint-ts": "tsc --noEmit",
     "test": "WATCH=true vitest",
-    "test:ci": "yarn build -t node && vitest run"
+    "test:ci": "yarn build -t node && vitest run",
+
+    "build": "npm run build:client && npm run build:server && npm run build:worker",
+    "build:client": "vite build --outDir dist/client --manifest",
+    "build:server": "vite build --outDir dist/server --ssr @shopify/hydrogen/platforms/node",
+    "build:worker": "cross-env WORKER=true vite build --outDir dist/worker --ssr @shopify/hydrogen/platforms/worker-event",
+    "start": "node --enable-source-maps dist/server",
+    "preview": "npx @shopify/hydrogen-cli@latest preview"
   },
   "devDependencies": {
     "@shopify/cli": "3.39.0",
@@ -35,7 +40,10 @@
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.0",
+    "@mui/material": "^5.11.7",
     "@shopify/hydrogen": "^1.6.6",
     "clsx": "^1.1.1",
     "graphql-tag": "^2.12.6",
