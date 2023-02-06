@@ -34,6 +34,7 @@ export function Footer({menu}) {
         </Heading>
         <CountrySelector />
       </section>
+      
       <form
         className="flex flex-col"
         action="https://usebasin.com/f/1a2b3c4d5e6f"
@@ -47,6 +48,7 @@ export function Footer({menu}) {
           <button type="submit">Submit</button>
         </div>
       </form>
+
       <div
         className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
       >
